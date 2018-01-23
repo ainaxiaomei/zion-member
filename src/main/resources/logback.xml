@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<contextName>member</contextName>
+	
+	<appender name="std" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%date [%thread] %-5level %logger{80} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+    <!-- 将日志收集到flume
+    <appender name="flume" class="com.gilt.flume.logback.FlumeLogstashV1Appender">
+         <flumeAgents>
+             192.168.5.224:4141,
+         </flumeAgents>
+         <flumeProperties>
+             connect-timeout=4000;
+             request-timeout=8000
+         </flumeProperties>
+         <batchSize>100</batchSize>
+         <reportingWindow>1000</reportingWindow>
+         <application>lms</application>
+         <layout class="ch.qos.logback.classic.PatternLayout">
+             <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - \(%file:%line\) - %message%n%ex</pattern>
+         </layout>
+     </appender>
+     -->
+     
+    <!-- web层日志 -->
+	<appender name="web"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 当前Log文件名 -->
+		<file>member-web.log</file>
+		<encoder>
+			<pattern>
+				%date [%thread] %-5level %logger{80} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>member-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.snail.zion.member.web" level="DEBUGE" additivity="false">
+		<appender-ref ref="web" />
+		<appender-ref ref="std" />
+	</logger>
+	
+    <!-- service层日志 -->
+	<appender name="service"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 当前Log文件名 -->
+		<file>member-service.log</file>
+		<encoder>
+			<pattern>
+				%date [%thread] %-5level %logger{80} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>member-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.snail.zion.member.service" level="DEBUG" additivity="false">
+		<appender-ref ref="service" />
+		<appender-ref ref="std" />
+	</logger>
+	
+    <!-- dao层日志 -->
+	<appender name="dao"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 当前Log文件名 -->
+		<file>member-dao.log</file>
+		<encoder>
+			<pattern>
+				%date [%thread] %-5level %logger{80} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>member-dao.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.snail.zion.member.dao" level="DEBUGE" additivity="false">
+		<appender-ref ref="dao" />
+		<appender-ref ref="std" />
+	</logger>
+	
+	<logger name="com.snail.zion.member.mapper" level="DEBUGE" additivity="false">
+		<appender-ref ref="dao" />
+		<appender-ref ref="std" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="std" />
+	</root>
+
+</configuration>
