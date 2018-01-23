@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 
 import com.alibaba.fastjson.JSONObject;
 import com.snail.zion.member.web.annotation.LoginCheck;

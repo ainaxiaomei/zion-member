@@ -17,8 +17,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.snail.zion.member.service.snailcloud.SnailCloudConfig;
@@ -29,8 +27,6 @@ import io.swagger.jaxrs.config.BeanConfig;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.snail.lms")
-@EnableRedisHttpSession // 注册SessionSessionRepositoryFilter的bean
-@EnableTransactionManagement
 @EnableEurekaClient
 public class ZionMemberApplication {
     
